@@ -1,4 +1,6 @@
 
+require('dotenv').config();
+
 const express = require('express');
 
 const app = express();
@@ -8,6 +10,7 @@ app.use(express.json());
 
 // Importa as rotas de usuários
 const usuariosRoutes = require('./routes/usuarios');
+const authRoutes = require('./routes/auth');
 
 // Rota principal
 app.get('/', (req, res) => {
@@ -16,6 +19,7 @@ app.get('/', (req, res) => {
 
 // Utiliza as rotas de usuários
 app.use('/usuarios', usuariosRoutes);
+app.use('/auth', authRoutes);
 
 // Exporta a aplicação para outros arquivos
 module.exports = app;

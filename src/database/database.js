@@ -17,6 +17,13 @@ db.exec(`
     )
 `);
 
+// Adiciona a coluna de senha criptografada, caso ainda não exista
+const colunas = db.prepare('PRAGMA table_info(usuarios)').all();
+
+if (!colunas.some(coluna => coluna.name === 'senha_hash')) {
+    db.exec('ALTER TABLE usuarios ADD COLUMN senha_hash TEXT');
+}
+
 // Impede o cadastro de e-mails duplicados
 db.exec(`
     CREATE UNIQUE INDEX IF NOT EXISTS idx_usuarios_email

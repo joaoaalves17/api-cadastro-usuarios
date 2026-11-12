@@ -1,35 +1,41 @@
 const db = require('../database/database');
+const bcrypt = require('bcrypt');
 
 // Listar todos os usuários
 function listarUsuarios(req, res) {
-    const usuarios = db.prepare('SELECT * FROM usuarios').all();
+    const usuarios = db.prepare(
+        'SELECT id, nome, email FROM usuarios'
+    ).all();
 
     res.json(usuarios);
 }
 
 // Cadastrar um novo usuário
-function cadastrarUsuario(req, res) {
-    const { nome, email } = req.body;
+async function cadastrarUsuario(req, res) {
+    const { nome, email, senha } = req.body;
 
     const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
     if (
-        typeof nome !== 'string' ||
-        !nome.trim() ||
-        typeof email !== 'string' ||
-        !email.trim() ||
-        !emailValido
-    ) {
-        return res.status(400).json({
-            mensagem: 'Nome e e-mail devem ser preenchidos corretamente!'
-        });
-    }
+    typeof nome !== 'string' ||
+    !nome.trim() ||
+    typeof email !== 'string' ||
+    !email.trim() ||
+    !emailValido ||
+    typeof senha !== 'string' ||
+    senha.length < 8
+) {
+    return res.status(400).json({
+        mensagem: 'Nome, e-mail e senha devem ser preenchidos corretamente. A senha deve ter pelo menos 8 caracteres!'
+    });
+}
 
     try {
+        const senhaHash = await bcrypt.hash(senha, 10);
         const resultado = db.prepare(`
-            INSERT INTO usuarios (nome, email)
-            VALUES (?, ?)
-        `).run(nome.trim(), email.trim());
+        INSERT INTO usuarios (nome, email, senha_hash)
+        VALUES (?, ?, ?)
+`).run(nome.trim(), email.trim(), senhaHash);
 
         res.status(201).json({
             mensagem: 'Usuário cadastrado com sucesso!',

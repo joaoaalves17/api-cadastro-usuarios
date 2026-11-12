@@ -1,23 +1,20 @@
 
 const express = require('express');
 const usuariosController = require('../controllers/usuariosController');
+const autenticarToken = require('../middlewares/authMiddleware');
 
 const router = express.Router();
 
-// Listar todos os usuários
+// Listar usuários (protegido)
+router.get('/', autenticarToken, usuariosController.listarUsuarios);
 
-router.get('/', usuariosController.listarUsuarios);
-
-// Cadastrar um usuário
-
+// Cadastrar usuário (público)
 router.post('/', usuariosController.cadastrarUsuario);
 
-// Atualizar um usuário
+// Atualizar usuário (protegido)
+router.put('/:id', autenticarToken, usuariosController.atualizarUsuario);
 
-router.put('/:id', usuariosController.atualizarUsuario);
-
-// Excluir um usuário
-
-router.delete('/:id', usuariosController.excluirUsuario);
+// Excluir usuário (protegido)
+router.delete('/:id', autenticarToken, usuariosController.excluirUsuario);
 
 module.exports = router;
