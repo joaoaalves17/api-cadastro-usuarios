@@ -3,8 +3,6 @@ const express = require('express');
 
 const app = express();
 
-const PORT = 3001;
-
 // Permite receber dados em JSON
 app.use(express.json());
 
@@ -19,7 +17,14 @@ app.get('/', (req, res) => {
 // Utiliza as rotas de usuários
 app.use('/usuarios', usuariosRoutes);
 
-// Inicialização do servidor
-app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
-});
+// Exporta a aplicação para outros arquivos
+module.exports = app;
+
+// Inicializa o servidor somente quando executado diretamente
+if (require.main === module) {
+    const PORT = 3001;
+
+    app.listen(PORT, () => {
+        console.log(`Servidor rodando na porta ${PORT}`);
+    });
+}

@@ -3,7 +3,7 @@ const Database = require('better-sqlite3');
 const path = require('path');
 
 // Define onde o banco de dados será armazenado
-const caminhoBanco = path.resolve(__dirname, 'usuarios.db');
+const caminhoBanco = process.env.DB_FILE || path.resolve(__dirname, 'usuarios.db');
 
 // Cria ou conecta ao banco de dados
 const db = new Database(caminhoBanco);

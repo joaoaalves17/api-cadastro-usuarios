@@ -25,6 +25,9 @@ Projeto desenvolvido para praticar conceitos de desenvolvimento backend, operaç
 - Validar identificadores dos usuários.
 - Tratar erros e retornar códigos HTTP apropriados.
 - Armazenar dados de forma persistente utilizando SQLite.
+- Testes automatizados utilizando Node.js Test Runner e Supertest.
+- Testes das operações CRUD e validações da API.
+- Banco de dados em memória para execução dos testes.
 
 ## Endpoints
 
@@ -78,6 +81,23 @@ Retorna a lista de usuários cadastrados.
 **Rota:** `/usuarios/1`
 
 Exclui o usuário correspondente ao ID informado.
+
+## Testes automatizados
+
+Para executar os testes automatizados:
+
+\`\`\`bash
+npm test
+\`\`\`
+
+Os testes verificam:
+- Listagem de usuários.
+- Cadastro de usuários.
+- Bloqueio de e-mails duplicados.
+- Validação de dados.
+- Atualização e exclusão de usuários.
+- Tratamento de usuários inexistentes.
+- Validação de identificadores inválidos.
 
 ## Instalação e execução
 
