@@ -145,17 +145,23 @@ Após iniciar, a API estará disponível em:
 ## Estrutura do projeto
 
 ```text
+
 api-cadastro-usuarios/
 ├── src/
+│   ├── controllers/
+│   │   └── usuariosController.js
 │   ├── database/
 │   │   └── database.js
 │   ├── routes/
 │   │   └── usuarios.js
 │   └── server.js
+├── tests/
+│   └── usuarios.test.js
 ├── .gitignore
 ├── package.json
 ├── package-lock.json
 └── README.md
+
 ```
 
 ## Objetivo
