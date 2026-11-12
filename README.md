@@ -89,13 +89,13 @@ Exclui o usuário correspondente ao ID informado.
 ### 1. Clonar o repositório
 
 ```bash
-git clone URL_DO_REPOSITORIO
+git clone https://github.com/joaoaalves17/api-cadastro-usuarios.git
 ```
 
 ### 2. Entrar na pasta do projeto
 
 ```bash
-cd api-cadastro-usuario
+cd api-cadastro-usuarios
 ```
 
 ### 3. Instalar as dependências
@@ -125,7 +125,7 @@ Após iniciar, a API estará disponível em:
 ## Estrutura do projeto
 
 ```text
-api-cadastro-usuario/
+api-cadastro-usuarios/
 ├── src/
 │   ├── database/
 │   │   └── database.js
